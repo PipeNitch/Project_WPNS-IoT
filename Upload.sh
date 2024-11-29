@@ -1,10 +1,10 @@
 #!/bin/bash
-cd /home/pipenooyimsai/Documents/Project_WPNS-IoT
+cd /home/pipenooyimsai/Documents/Projects/Project_WPNS-IoT
 
 git add .
 
-commit_message="Auto-update: $(date '+%Y-%m-%d %H:%M:%S')"
+commit_message="Update: $(date '+%Y-%m-%d %H:%M:%S')"
 
 git commit -m "$commit_message"
 
-git push origin main
+git push -u origin main
