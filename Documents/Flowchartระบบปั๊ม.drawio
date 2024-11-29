@@ -1,0 +1,239 @@
+<mxfile host="app.diagrams.net" modified="2024-05-21T16:33:13.640Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="xzBmwsosWbOl2zhAxxFZ" version="24.4.4" type="device">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="1615" dy="788" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="9Dl25UWo1p4aJF2bHYSF-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="WIyWlLk6GJQsqaUBKTNV-3" target="9Dl25UWo1p4aJF2bHYSF-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="390" y="79" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-3" value="เริ่มต้น" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;glass=0;strokeWidth=1;shadow=0;arcSize=50;fontFamily=Angsana New;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="329.5" y="80" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ng9mBBSaT-rFHwD7lpen-28" value="ไม่ใช่" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Angsana New;fontSize=16;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="284" y="248.5" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="9Dl25UWo1p4aJF2bHYSF-3" value="&lt;div style=&quot;&quot;&gt;เชื่อมต่อสัญญา WiFi&lt;/div&gt;&lt;div style=&quot;&quot;&gt;และ Server Blynk&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Angsana New;fontSize=16;align=center;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="330.5" y="171" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="9Dl25UWo1p4aJF2bHYSF-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="9Dl25UWo1p4aJF2bHYSF-6" target="9Dl25UWo1p4aJF2bHYSF-21" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o7gqgrwFCgOGfCgpgL1x-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="9Dl25UWo1p4aJF2bHYSF-6" target="9Dl25UWo1p4aJF2bHYSF-7" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="81" y="272.5" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="221" y="273" />
+              <mxPoint x="221" y="145" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9Dl25UWo1p4aJF2bHYSF-6" value="เชื่อมต่อได้" style="rhombus;whiteSpace=wrap;html=1;fontFamily=Angsana New;fontSize=16;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="324" y="245" width="132" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="9Dl25UWo1p4aJF2bHYSF-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="9Dl25UWo1p4aJF2bHYSF-7" target="9Dl25UWo1p4aJF2bHYSF-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9Dl25UWo1p4aJF2bHYSF-7" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fontFamily=Angsana New;fontSize=16;strokeWidth=1;align=center;verticalAlign=middle;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="384.75" y="140" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="9Dl25UWo1p4aJF2bHYSF-21" value="อ่านค่าคงที่ของระบบจาก EEPROM" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Angsana New;fontSize=16;align=center;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="330" y="322" width="120" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="z4wxpSobRew-qUf7Lra--21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="9Dl25UWo1p4aJF2bHYSF-25" target="z4wxpSobRew-qUf7Lra--3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="9Dl25UWo1p4aJF2bHYSF-25" value="แสดงค่าคงที่ของระบบที่แอปพลิเคชัน Blynk" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.display;whiteSpace=wrap;rounded=0;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Angsana New;fontSize=16;fontColor=default;fillColor=default;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="323" y="386" width="133" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="9Dl25UWo1p4aJF2bHYSF-45" value="ใช่" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Angsana New;fontSize=16;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="389.75" y="296" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="9Dl25UWo1p4aJF2bHYSF-54" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="9Dl25UWo1p4aJF2bHYSF-21" target="9Dl25UWo1p4aJF2bHYSF-25" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="391" y="385" as="sourcePoint" />
+            <mxPoint x="441" y="335" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9Dl25UWo1p4aJF2bHYSF-56" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="9Dl25UWo1p4aJF2bHYSF-3" target="9Dl25UWo1p4aJF2bHYSF-6" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="402" y="320" as="sourcePoint" />
+            <mxPoint x="452" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="o7gqgrwFCgOGfCgpgL1x-3" target="pbIzC7XeTwds3hs3rwOw-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="o7gqgrwFCgOGfCgpgL1x-3" value="แสดงค่าเวลาที่ Blynk" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.display;whiteSpace=wrap;rounded=0;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Angsana New;fontSize=16;fontColor=default;fillColor=default;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="322" y="576" width="134" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="o7gqgrwFCgOGfCgpgL1x-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="392" y="883" />
+              <mxPoint x="82" y="883" />
+            </Array>
+            <mxPoint x="391.75" y="838" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="o7gqgrwFCgOGfCgpgL1x-51" value="วินาทีละ 1 ครั้ง" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.annotation_1;align=left;pointerEvents=1;fontFamily=Angsana New;fontSize=16;dashed=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="539" y="530" width="87" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="z4wxpSobRew-qUf7Lra--0" value="&lt;div style=&quot;&quot;&gt;ติดต่อ Server Blynk&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Angsana New;fontSize=16;align=center;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="336.63" y="498" width="104.25" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="z4wxpSobRew-qUf7Lra--2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="z4wxpSobRew-qUf7Lra--0" target="o7gqgrwFCgOGfCgpgL1x-3" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z4wxpSobRew-qUf7Lra--12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" target="z4wxpSobRew-qUf7Lra--0" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="388.76" y="473.9999999999999" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="z4wxpSobRew-qUf7Lra--3" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="384.75" y="466" width="8" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="z4wxpSobRew-qUf7Lra--7" value="ปั๊มน้ำทำงาน" style="rhombus;whiteSpace=wrap;html=1;fontFamily=Angsana New;fontSize=16;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="322.75" y="724" width="132" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.501;entryY=0.193;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="z4wxpSobRew-qUf7Lra--8" target="MukYhpPO2q3NCpd24JDc-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z4wxpSobRew-qUf7Lra--8" value="ส่งข้อความไลน์&amp;nbsp;&lt;div&gt;&quot;ปั๊มน้ำทำงาน&quot;&lt;/div&gt;" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.display;whiteSpace=wrap;rounded=0;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Angsana New;fontSize=16;fontColor=default;fillColor=default;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="322.75" y="789" width="133" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="z4wxpSobRew-qUf7Lra--9" target="pbIzC7XeTwds3hs3rwOw-32">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="210" y="1046" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="223" y="973" />
+              <mxPoint x="223" y="1190" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="z4wxpSobRew-qUf7Lra--9" target="z4wxpSobRew-qUf7Lra--10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z4wxpSobRew-qUf7Lra--9" value="น้ำไม่ไหล&lt;div&gt;เกินเวลาที่กำหนด&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;fontFamily=Angsana New;fontSize=16;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="323" y="944" width="132" height="58" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="z4wxpSobRew-qUf7Lra--10" target="pbIzC7XeTwds3hs3rwOw-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z4wxpSobRew-qUf7Lra--10" value="ส่งข้อความไลน์&amp;nbsp;&lt;div&gt;&quot;ปั๊มน้ำทำงาน&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;น้ำไม่ไหล&quot;&lt;/span&gt;&lt;/div&gt;" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.display;whiteSpace=wrap;rounded=0;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Angsana New;fontSize=16;fontColor=default;fillColor=default;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="314" y="1031" width="149.87" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="z4wxpSobRew-qUf7Lra--32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.989;exitY=0.496;exitDx=0;exitDy=0;exitPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="z4wxpSobRew-qUf7Lra--7" target="z4wxpSobRew-qUf7Lra--3" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="481" y="765" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="648" y="746" />
+              <mxPoint x="648" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="z4wxpSobRew-qUf7Lra--28" value="ไม่ใช่" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Angsana New;fontSize=16;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="449.5" y="722.5" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="z4wxpSobRew-qUf7Lra--29" value="ใช่" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Angsana New;fontSize=16;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="387" y="763" width="40" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="z4wxpSobRew-qUf7Lra--30" value="ไม่ใช่" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Angsana New;fontSize=16;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="283" y="952" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="z4wxpSobRew-qUf7Lra--31" value="ใช่" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Angsana New;fontSize=16;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="394.75" y="1002" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="MukYhpPO2q3NCpd24JDc-1" value="" style="endArrow=none;dashed=1;html=1;strokeWidth=1;fontFamily=Angsana New;entryX=0.92;entryY=0.14;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;fontSize=16;entryPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="o7gqgrwFCgOGfCgpgL1x-51" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="502" y="558" as="sourcePoint" />
+            <mxPoint x="456" y="606" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="MukYhpPO2q3NCpd24JDc-12" target="z4wxpSobRew-qUf7Lra--9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="MukYhpPO2q3NCpd24JDc-12" value="อ่านค่า FlowSwitch&lt;br&gt;ตรวจสอบการไหลของน้ำ" style="html=1;strokeWidth=1;shape=manualInput;whiteSpace=wrap;rounded=0;size=26;arcSize=11;strokeColor=default;align=center;verticalAlign=bottom;fontFamily=Angsana New;fontSize=16;fontColor=default;fillColor=default;horizontal=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="331.5" y="858" width="115" height="63" as="geometry" />
+        </mxCell>
+        <mxCell id="xHlNb0R45e97w-YIwmcm-1" value="" style="endArrow=none;dashed=1;html=1;strokeWidth=1;fontFamily=Angsana New;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;fontSize=16;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="xHlNb0R45e97w-YIwmcm-2" target="9Dl25UWo1p4aJF2bHYSF-21" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="495.5" y="292" as="sourcePoint" />
+            <mxPoint x="449.5" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="xHlNb0R45e97w-YIwmcm-2" value="เวลาหน่วงการตรวจจับน้ำไหล (วินาที)&lt;div&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;ปริมาณกระแสไฟฟ้าที่เกินกำหนด (แอมป์)&lt;/span&gt;&lt;/div&gt;" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.annotation_1;align=left;pointerEvents=1;fontFamily=Angsana New;fontSize=14;dashed=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="532.5" y="264" width="131.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-1" value="&lt;div style=&quot;&quot;&gt;ตรวจสอบการทำงานของปั๊มน้ำ&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Angsana New;fontSize=16;align=center;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="336.63" y="659" width="104.25" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-6" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="pbIzC7XeTwds3hs3rwOw-1" target="z4wxpSobRew-qUf7Lra--7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="404" y="763" as="sourcePoint" />
+            <mxPoint x="454" y="713" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-7" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="z4wxpSobRew-qUf7Lra--7" target="z4wxpSobRew-qUf7Lra--8">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="383" y="856" as="sourcePoint" />
+            <mxPoint x="433" y="806" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-33" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="pbIzC7XeTwds3hs3rwOw-20" target="pbIzC7XeTwds3hs3rwOw-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-20" value="&lt;div style=&quot;&quot;&gt;ตัดการทำงานของปั๊มน้ำ&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Angsana New;fontSize=16;align=center;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="328.5" y="1115" width="122" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="pbIzC7XeTwds3hs3rwOw-32" target="pbIzC7XeTwds3hs3rwOw-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-32" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="383.75" y="1185" width="11" height="11" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-40" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="pbIzC7XeTwds3hs3rwOw-35" target="pbIzC7XeTwds3hs3rwOw-38">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="pbIzC7XeTwds3hs3rwOw-35" target="pbIzC7XeTwds3hs3rwOw-44">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="486.1071428571431" y="1260" as="sourcePoint" />
+            <mxPoint x="420" y="1478.25" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="552" y="1260" />
+              <mxPoint x="552" y="1474" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-35" value="ปั๊มน้ำใช้กระแสไฟ&lt;div&gt;มากกว่าที่กำหนด&lt;/div&gt;" style="rhombus;whiteSpace=wrap;html=1;fontFamily=Angsana New;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="309.75" y="1224" width="160" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-42" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="pbIzC7XeTwds3hs3rwOw-38" target="pbIzC7XeTwds3hs3rwOw-41">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-38" value="ส่งข้อความไลน์&amp;nbsp;&lt;div&gt;&quot;ปั๊มน้ำใช้พลังงานไฟฟ้ามากกว่าที่กำหนด&lt;span style=&quot;background-color: initial;&quot;&gt;&quot;&lt;/span&gt;&lt;/div&gt;" style="strokeWidth=1;html=1;shape=mxgraph.flowchart.display;whiteSpace=wrap;rounded=0;strokeColor=default;align=center;verticalAlign=middle;fontFamily=Angsana New;fontSize=16;fontColor=default;fillColor=default;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="306.38" y="1319" width="166.74" height="56" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-45" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="pbIzC7XeTwds3hs3rwOw-41" target="pbIzC7XeTwds3hs3rwOw-44">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-41" value="&lt;div style=&quot;&quot;&gt;ตัดการทำงานของปั๊มน้ำ&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Angsana New;fontSize=16;align=center;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="329" y="1405" width="122" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="pbIzC7XeTwds3hs3rwOw-44" target="z4wxpSobRew-qUf7Lra--3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="117" y="1474" />
+              <mxPoint x="117" y="470" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pbIzC7XeTwds3hs3rwOw-44" value="" style="ellipse;whiteSpace=wrap;html=1;fontSize=16;fontFamily=Angsana New;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="385" y="1469.5" width="9.5" height="9.5" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
