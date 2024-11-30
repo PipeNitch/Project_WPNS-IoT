@@ -1,5 +1,6 @@
 #include <PZEM004Tv30.h>
 #include <BlynkSimpleEsp8266.h>
+#include <TridentTD_LineNotify.h>
 //#include <LiquidCrystal_I2C.h>
 #include <Wire.h>
 #include <EEPROM.h>
@@ -7,21 +8,14 @@
 #include <WidgetRTC.h>
 #include <TimeLib.h>
 
-byte RelayAt = D4;
-byte FlowSwitchAt = D5;
-unsigned long last;
-byte FlowSwitchStatus = 0;
-byte isExit = 0;
-byte StatusSendLinePump = 0;
-byte StatusSendLineNotFlow = 0;
-byte StatusSendLineWaterFlow = 0;
-float current = 0;
-
 const char* auth = "81PnZkd7Wmmt2rGAmoO7NaqeZ-Jc8kNd";
-const char* LToken = "W3bppMPP56vtyf3d1G4WfmKozhzUgwHWfSwE8z6iSlr";
+const char* LToken = "cZW2GpTn64FenmiTt38AfgMHWvt4XdlLS7gqChQmwnO";
+
 // only 2.4 G
-const char* ssid = "Tenda_F1B010";
-const char* pass = "kai.kai.kai";
+//const char* ssid = "Tenda_F1B010";
+//const char* pass = "kai.kai.kai";
+const char* ssid = "Inch";
+const char* pass = "licht4825!";
 
 WidgetRTC rtc;
 PZEM004Tv30 pzem(D6, D7);
@@ -29,6 +23,22 @@ BlynkTimer timer;
 //LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 BLYNK_CONNECTED(){rtc.begin();}
+
+byte PumpStatus = 0;
+byte RelayAt = D4;
+byte FlowSwitchAt = D5;
+unsigned long last_time;
+byte FlowSwitchStatus = 0;
+byte isExit = 0;
+byte StatusSendLinePump = 0;
+byte StatusSendLineNotFlow = 0;
+byte StatusSendLineWaterFlow = 0;
+float current = 0;
+
+WidgetLED LEDpumpworking(V2);
+WidgetLED LEDpumppause(V3);
+WidgetLED LEDFlowSwitch(V1);
+WidgetLED LEDabnormalcurrent(V5);
 
 unsigned long Delayflow = 0;
 unsigned long AmpLimit = 0;
@@ -73,20 +83,26 @@ BLYNK_WRITE(V0) {
 
 void setup() {
   Serial.begin(115200);
-//  WiFi.begin(ssid, pass);
-  Blynk.begin(auth, ssid, pass, "blynk.en-26.com", 9600);
+  WiFi.begin(ssid, pass);
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print("Connecting...\n");
     delay(500);
   }
+  Blynk.begin(auth, ssid, pass, "blynk.en-26.com", 9600);
+  Serial.println(LINE.getVersion());
+  
+  timer.setInterval(900L, clockDisplay);
+  
   EEPROM.begin(512);
-
-  timer.setInterval(1000L, clockDisplay);
+  clockDisplay();
   
   Delayflow = EEPROM.read(0)*1000;
   AmpLimit = EEPROM.read(1);
-  DelayAmp = EEPROM.read(2);
+  DelayAmp = EEPROM.read(2)*1000;
   LineNoti = EEPROM.read(3);
+  
+  LINE.setToken(LToken);
+  LINE.notify("Starting System");
   
   pinMode(FlowSwitchAt, INPUT);
   pinMode(RelayAt, OUTPUT);
@@ -95,7 +111,7 @@ void setup() {
 //  lcd.backlight();
 //  lcd.clear();
 //  lcd.print("Pump Status: ");
-  last = millis();
+  last_time = millis();
   digitalWrite(RelayAt, 1);
 }
 
@@ -130,17 +146,17 @@ void loop() {
     // Check FlowSwitch Status
     if(FlowSwitchStatus){
       Serial.println("ON");
-      last = millis();
+      last_time = millis();
       }
     else {
       Serial.println("OFF");
-      if(millis()-last>Delayflow){
+      if(millis()-last_time>Delayflow){
         isExit = 1;
       }
     }
-  }.
+  }
   else{
-    last = millis();
+    last_time = millis();
   }
   if(isExit){
     digitalWrite(RelayAt, 0);
