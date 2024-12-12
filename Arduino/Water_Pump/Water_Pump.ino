@@ -87,7 +87,7 @@ BLYNK_WRITE(V0) {
   EEPROM.commit();
   Serial.print("Received LineNoti: ");
   Serial.println(LineNoti);
-  if(LineNoti)LINE.notify("Received LineNoti: True");
+  if (LineNoti) LINE.notify("Received LineNoti: True");
   else LINE.notify("Received LineNoti: False");
 }
 
@@ -97,7 +97,7 @@ BLYNK_WRITE(V7) {
   EEPROM.commit();
   Serial.print("Received ProtectMode: ");
   Serial.println(ProtectMode);
-  if(ProtectMode)LINE.notify("Received ProtectMode: True");
+  if (ProtectMode) LINE.notify("Received ProtectMode: True");
   else LINE.notify("Received ProtectMode: False");
 }
 
@@ -122,6 +122,7 @@ void setup() {
   AmpLimit = EEPROM.read(1);
   DelayAmp = EEPROM.read(2) * 1000;
   LineNoti = EEPROM.read(3);
+  isexit = 0;
 
   LINE.setToken(LToken);
   LINE.notify("Starting System");
@@ -227,7 +228,6 @@ void loop() {
     } else {
       LEDabnormalcurrent.off();  // off LED v5
     }
-
   }
 
   if (isnan(pzem.current())) current = 0;
