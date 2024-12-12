@@ -1,3 +1,5 @@
+// กำลังทำ amplasttime
+
 #include <PZEM004Tv30.h>
 #include <BlynkSimpleEsp8266.h>
 #include <TridentTD_LineNotify.h>
@@ -29,7 +31,8 @@ BLYNK_CONNECTED() {
 byte PumpStatus = 0;
 byte RelayAt = D4;
 byte FlowSwitchAt = D5;
-unsigned long last_time;
+unsigned long flowlasttime;
+unsigned long lowamplasttime;
 byte FlowSwitchStatus = 0;
 byte isExit = 0;
 byte StatusSendLinePump = 0;
@@ -130,7 +133,8 @@ void setup() {
   //  lcd.backlight();
   //  lcd.clear();
   //  lcd.print("Pump Status: ");
-  last_time = millis();
+  flowlasttime = millis();
+  lowamplasttime = millis();
   digitalWrite(RelayAt, 1);
 
   if (isnan(pzem.current())) current = 0.01;
@@ -165,21 +169,21 @@ void loop() {
     if (current > 0.3) {    // ถ้าปั๊มทำงาน
       LEDpumpworking.on();  // เปิด LED v2
       LEDpumppause.off();   // ปิด LED v3
-      last_time = millis();
+      flowlasttime = millis();
 
       // Check FlowSwitch Status
       if (FlowSwitchStatus) {
         LEDFlowSwitch.on();  // on LED v1
       } else {
         LEDFlowSwitch.off();  // off LED v1
-        if (millis() - last_time > Delayflow) {
+        if (millis() - flowlasttime > Delayflow) {
           isExit = 1;
         }
       }
     } else {
       LEDpumpworking.off();  // off LED v2
       LEDpumppause.on();     // on LED v3
-      last_time = millis();
+      flowlasttime = millis();
     }
 
     // ตรวจสอบกระแสผิดปกติ
@@ -200,21 +204,21 @@ void loop() {
     if (current > 0.3) {    // ถ้าปั๊มทำงาน
       LEDpumpworking.on();  // เปิด LED v2
       LEDpumppause.off();   // ปิด LED v3
-      last_time = millis();
+      flowlasttime = millis();
 
       // Check FlowSwitch Status
       if (FlowSwitchStatus) {
         LEDFlowSwitch.on();  // on LED v1
       } else {
         LEDFlowSwitch.off();  // off LED v1
-        if (millis() - last_time > Delayflow) {
+        if (millis() - flowlasttime > Delayflow) {
           isExit = 1;
         }
       }
     } else {
       LEDpumpworking.off();  // off LED v2
       LEDpumppause.on();     // on LED v3
-      last_time = millis();
+      flowlasttime = millis();
     }
 
     // ตรวจสอบกระแสผิดปกติ
