@@ -138,7 +138,7 @@ void setup() {
   lowamplasttime = millis();
   digitalWrite(RelayAt, 1);
 
-  if (isnan(pzem.current())) current = 0.01;
+  if (isnan(pzem.current())) current = 0;
   else current = pzem.current();
 }
 
