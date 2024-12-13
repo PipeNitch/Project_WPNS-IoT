@@ -122,7 +122,7 @@ void setup() {
   AmpLimit = EEPROM.read(1);
   DelayAmp = EEPROM.read(2) * 1000;
   LineNoti = EEPROM.read(3);
-  isexit = 0;
+  isExit = 0;
 
   LINE.setToken(LToken);
   LINE.notify("Starting System");
@@ -167,7 +167,7 @@ void loop() {
   if (ProtectMode) {
 
     // Check Pump Status
-    if (current > 0.3) {    // ถ้าปั๊มทำงาน
+    if (current > 0.5) {    // ถ้าปั๊มทำงาน
       LEDpumpworking.on();  // เปิด LED v2
       LEDpumppause.off();   // ปิด LED v3
       flowlasttime = millis();
@@ -181,17 +181,19 @@ void loop() {
           isExit = 1;
         }
       }
+
+      // ตรวจสอบกระแสผิดปกติ
+      if (current < AmpLimit) {
+        LEDabnormalcurrent.off();  // off LED v5
+      } else {
+        LEDabnormalcurrent.on();  // on LED v5
+      }
+
     } else {
       LEDpumpworking.off();  // off LED v2
       LEDpumppause.on();     // on LED v3
       flowlasttime = millis();
-    }
-
-    // ตรวจสอบกระแสผิดปกติ
-    if (current > AmpLimit) {
-      LEDabnormalcurrent.on();  // on LED v5
-    } else {
-      LEDabnormalcurrent.off();  // off LED v5
+      lowamplasttime = millis();
     }
 
     if (isExit) {
@@ -200,34 +202,6 @@ void loop() {
     }
 
   } else {
-
-    // Check Pump Status
-    if (current > 0.3) {    // ถ้าปั๊มทำงาน
-      LEDpumpworking.on();  // เปิด LED v2
-      LEDpumppause.off();   // ปิด LED v3
-      flowlasttime = millis();
-
-      // Check FlowSwitch Status
-      if (FlowSwitchStatus) {
-        LEDFlowSwitch.on();  // on LED v1
-      } else {
-        LEDFlowSwitch.off();  // off LED v1
-        if (millis() - flowlasttime > Delayflow) {
-          isExit = 1;
-        }
-      }
-    } else {
-      LEDpumpworking.off();  // off LED v2
-      LEDpumppause.on();     // on LED v3
-      flowlasttime = millis();
-    }
-
-    // ตรวจสอบกระแสผิดปกติ
-    if (current > AmpLimit) {
-      LEDabnormalcurrent.on();  // on LED v5
-    } else {
-      LEDabnormalcurrent.off();  // off LED v5
-    }
   }
 
   if (isnan(pzem.current())) current = 0;
