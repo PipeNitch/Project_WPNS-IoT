@@ -15,11 +15,8 @@ const char* LToken = "cZW2GpTn64FenmiTt38AfgMHWvt4XdlLS7gqChQmwnO";
 // only 2.4 G
 // const char* ssid = "Tenda_F1B010";
 // const char* pass = "kai.kai.kai";
-<<<<<<< HEAD
-=======
 const char* ssid = "Watnoo";
 const char* pass = "0817927275";
->>>>>>> c9b41f7 (12/21/2024)
 const char* ssid = "Inch";
 const char* pass = "licht4825!";
 
@@ -38,11 +35,7 @@ byte pin_column[COLUMN_NUM] = { 4, 5, 6, 7 };
 
 WidgetRTC rtc;
 PZEM004Tv30 pzem(D6, D7);
-<<<<<<< HEAD
-BlynkTimer Timer, TimerSensor;
-=======
 BlynkTimer TimerClockDisplay, TimerSensor;
->>>>>>> c9b41f7 (12/21/2024)
 Keypad_I2C keypad(makeKeymap(keys), pin_rows, pin_column, ROW_NUM, COLUMN_NUM, 0x20);
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
@@ -86,11 +79,7 @@ BLYNK_WRITE(V10) {
   EEPROM.write(0, DelayFlow);
   EEPROM.commit();
   DelayFlow = DelayFlow * 1000;
-<<<<<<< HEAD
-  if(page==1)PageDelayFlow();
-=======
   if (page == 1) PageDelayFlow();
->>>>>>> c9b41f7 (12/21/2024)
   Serial.println((String) "Received DelayFlow: " + DelayFlow);
   // if (LineNoti) LINE.notify((String) "Received DelayFlow: " + DelayFlow / 1000 + " sec");
 }
@@ -99,11 +88,7 @@ BLYNK_WRITE(V9) {
   AmpLimit = param.asInt();
   EEPROM.write(1, AmpLimit);
   EEPROM.commit();
-<<<<<<< HEAD
-  if(page ==3)PageAmpLimit();
-=======
   if (page == 3) PageAmpLimit();
->>>>>>> c9b41f7 (12/21/2024)
   Serial.println((String) "Received AmpLimit: " + AmpLimit);
   // if (LineNoti) LINE.notify((String) "Received AmpLimit: " + AmpLimit + " Amp");
 }
@@ -113,11 +98,7 @@ BLYNK_WRITE(V6) {
   EEPROM.write(2, DelayAmp);
   EEPROM.commit();
   DelayAmp = DelayAmp * 1000;
-<<<<<<< HEAD
-  if(page==2)PageDelayAmp();
-=======
   if (page == 2) PageDelayAmp();
->>>>>>> c9b41f7 (12/21/2024)
   Serial.println((String) "Received DelayAmp: " + DelayAmp);
   // if (LineNoti) LINE.notify((String) "Received DelayAmp: " + DelayAmp / 1000 + " sec");
 }
@@ -158,17 +139,6 @@ BLYNK_WRITE(V11) {
 void setup() {
   Serial.begin(115200);
   WiFi.begin(ssid, pass);
-<<<<<<< HEAD
-  while (WiFi.status() != WL_CONNECTED) {
-    Serial.println("Connecting...");
-    delay(250);
-  }
-  Blynk.begin(auth, ssid, pass, "blynk.en-26.com", 9600);
-  Serial.println(LINE.getVersion());
-
-  Timer.setInterval(900L, clockDisplay);
-  TimerSensor.setInterval(250L, ReadSensor);
-=======
   // while (WiFi.status() != WL_CONNECTED) {
   //   Serial.println("Connecting...");
   //   delay(250);
@@ -178,22 +148,14 @@ void setup() {
 
   TimerClockDisplay.setInterval(850L, ClockDisplay);
   TimerSensor.setInterval(950L, ReadSensor);
->>>>>>> c9b41f7 (12/21/2024)
 
 
   keypad.begin(makeKeymap(keys));
   EEPROM.begin(512);
-<<<<<<< HEAD
-  clockDisplay();
-  lcd.init();
-  lcd.backlight();
-  // lcd.clear();
-=======
   ClockDisplay();
   lcd.init();
   lcd.backlight();
   lcd.clear();
->>>>>>> c9b41f7 (12/21/2024)
 
   DelayFlow = EEPROM.read(0) * 1000;
   AmpLimit = EEPROM.read(1);
@@ -222,26 +184,12 @@ void setup() {
   if (isnan(pzem.current())) current = 0;
   else current = pzem.current();
 
-<<<<<<< HEAD
-  mainmenu();
-  // lcd.setCursor(0, 0);
-  // lcd.print("1:Flow Delay");
-  // lcd.setCursor(0, 1);
-  // lcd.print("2:Amp Delay");
-  // lcd.setCursor(0, 2);
-  // lcd.print("3:Amp Limit");
-=======
   MainMenu();
->>>>>>> c9b41f7 (12/21/2024)
 }
 
 
 
-<<<<<<< HEAD
-void clockDisplay() {
-=======
 void ClockDisplay() {
->>>>>>> c9b41f7 (12/21/2024)
   char Time[10];
   sprintf(Time, "%d:%02d:%02d", hour(), minute(), second());
   String Date = String(day()) + "/" + month() + "/" + year();
@@ -261,291 +209,9 @@ void ReadSensor() {
   if (isnan(pzem.current())) current = 0;
   else current = pzem.current();
   FlowSwitchStatus = digitalRead(FlowSwitchAt);
-<<<<<<< HEAD
-}
-
-
-
-void mainmenu() {
-  page = 0;
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("1:Flow Delay");
-  lcd.setCursor(0, 1);
-  lcd.print("2:Amp Delay");
-  lcd.setCursor(0, 2);
-  lcd.print("3:Amp Limit");
-}
-
-void PageDelayFlow() {
-  page = 1;
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Flow Delay : ");
-  lcd.setCursor(13, 0);
-  lcd.print(DelayFlow / 1000);
-  lcd.setCursor(18, 0);
-  lcd.print("s");
-  lcd.setCursor(0, 1);
-  lcd.print("A:Add");
-  lcd.setCursor(0, 2);
-  lcd.print("B:Reduce");
-  lcd.setCursor(14, 2);
-  lcd.print("D:Back");
-}
-
-void UpdateDelayFlow(unsigned long value) {
-  Blynk.virtualWrite(V10, value);
-  UpdateEEPROM(0, value, "DelayFlow");
-  Serial.println((String) "Received DelayFlow: " + value * 1000);
-  if (LineNoti) LINE.notify((String) "Received DelayFlow: " + value + " sec");
-  PageDelayFlow();
-}
-
-
-void PageDelayAmp() {
-  page = 2;
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Amp Delay : ");
-  lcd.setCursor(12, 0);
-  lcd.print(DelayAmp / 1000);
-  lcd.setCursor(18, 0);
-  lcd.print("s");
-  lcd.setCursor(0, 1);
-  lcd.print("A:Add");
-  lcd.setCursor(0, 2);
-  lcd.print("B:Reduce");
-  lcd.setCursor(14, 2);
-  lcd.print("D:Back");
-}
-
-void UpdateDelayAmp(unsigned long value) {
-  Blynk.virtualWrite(V6, value);
-  UpdateEEPROM(2, value, "DelayAmp");
-  Serial.println((String) "Received DelayAmp: " + value * 1000);
-  if (LineNoti) LINE.notify((String) "Received DelayAmp: " + value + " sec");
-  PageDelayAmp();
-}
-
-
-void PageAmpLimit() {
-  page = 3;
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Amp Limit : ");
-  lcd.setCursor(12, 0);
-  lcd.print(AmpLimit);
-  lcd.setCursor(18, 0);
-  lcd.print("A");
-  lcd.setCursor(0, 1);
-  lcd.print("A:Add");
-  lcd.setCursor(0, 2);
-  lcd.print("B:Reduce");
-  lcd.setCursor(14, 2);
-  lcd.print("D:Back");
-}
-
-void UpdateAmpLimit(unsigned long value) {
-  Blynk.virtualWrite(V9, value);
-  UpdateEEPROM(1, value, "AmpLimit");
-  Serial.println((String) "Received AmpLimit: " + value);
-  if (LineNoti) LINE.notify((String) "Received AmpLimit: " + value + " Amp");
-  PageAmpLimit();
-}
-
-
-void UpdateEEPROM(byte address, unsigned long value, String label) {
-  EEPROM.write(address, value);
-  EEPROM.commit();
-  // Serial.println("commited EEPROM");
-}
-
-
-
-void loop() {
-  char key = keypad.getKey();
-
-  Blynk.run();
-  Timer.run();
-  TimerSensor.run();
-  Blynk.virtualWrite(V4, current);
-  if (key) {
-    Serial.print("Key Pressed: ");
-    Serial.println(key);
-    // Start Show LCD
-    switch (page) {
-      case 0:
-        switch (key) {
-          case '1': PageDelayFlow(); break;
-          case '2': PageDelayAmp(); break;
-          case '3': PageAmpLimit(); break;
-        }
-        break;
-      case 1:
-        switch (key) {
-          case 'A':
-            DelayFlow += 1000;
-            UpdateDelayFlow(DelayFlow / 1000);
-            break;
-          case 'B':
-            DelayFlow -= 1000;
-            UpdateDelayFlow(DelayFlow / 1000);
-            break;
-          case 'D': mainmenu(); break;
-        }
-        break;
-      case 2:
-        switch (key) {
-          case 'A':
-            DelayAmp += 1000;
-            UpdateDelayAmp(DelayAmp / 1000);
-            break;
-          case 'B':
-            DelayAmp -= 1000;
-            UpdateDelayAmp(DelayAmp / 1000);
-            break;
-          case 'D': mainmenu(); break;
-        }
-        break;
-      case 3:
-        switch (key) {
-          case 'A':
-            AmpLimit++;
-            UpdateAmpLimit(AmpLimit);
-            break;
-          case 'B':
-            AmpLimit--;
-            UpdateAmpLimit(AmpLimit);
-            break;
-          case 'D': mainmenu(); break;
-        }
-        break;
-    }
-
-    // if (page == 0) {
-    //   lcd.setCursor(0, 0);
-    //   lcd.print("1:Flow Delay");
-    //   lcd.setCursor(0, 1);
-    //   lcd.print("2:Amp Delay");
-    //   lcd.setCursor(0, 2);
-    //   lcd.print("3:Amp Limit");
-    //   if (key == '1') {
-    //     page = 1;
-    //     lcd.clear();
-    //   } else if (key == '2') {
-    //     page = 2;
-    //     lcd.clear();
-    //   } else if (key == '3') {
-    //     page = 3;
-    //     lcd.clear();
-    //   }
-    // }
-    // if (page == 1) {
-    //   lcd.setCursor(0, 0);
-    //   lcd.print("Flow Delay : ");
-    //   lcd.setCursor(13, 0);
-    //   lcd.print(DelayFlow / 1000);
-    //   lcd.setCursor(18, 0);
-    //   lcd.print("s");
-    //   lcd.setCursor(0, 2);
-    //   lcd.print("A:increase");
-    //   lcd.setCursor(0, 3);
-    //   lcd.print("B:decrease");
-    //   lcd.setCursor(14, 3);
-    //   lcd.print("D:Back");
-    //   if (key == 'A') {
-    //     DelayFlow += 1000;
-    //     EEPROM.write(0, DelayFlow / 1000);
-    //     EEPROM.commit();
-    //     Blynk.virtualWrite(V10, EEPROM.read(0));
-    //     Serial.println((String) "Received DelayFlow: " + DelayFlow);
-    //     // if (LineNoti) LINE.notify((String) "Received DelayFlow: " + DelayFlow / 1000 + " sec");
-    //   } else if (key == 'B') {
-    //     DelayFlow -= 1000;
-    //     EEPROM.write(0, DelayFlow / 1000);
-    //     EEPROM.commit();
-    //     Blynk.virtualWrite(V10, EEPROM.read(0));
-    //     Serial.println((String) "Received DelayFlow: " + DelayFlow);
-    //     // if (LineNoti) LINE.notify((String) "Received DelayFlow: " + DelayFlow / 1000 + " sec");
-    //   } else if (key == 'D') {
-    //     lcd.clear();
-    //     page = 0;
-    //   }
-    // }
-    // if (page == 2) {
-    //   lcd.setCursor(0, 0);
-    //   lcd.print("Amp Delay : ");
-    //   lcd.setCursor(12, 0);
-    //   lcd.print(DelayAmp / 1000);
-    //   lcd.setCursor(18, 0);
-    //   lcd.print("s");
-    //   lcd.setCursor(0, 2);
-    //   lcd.print("A:increase");
-    //   lcd.setCursor(0, 3);
-    //   lcd.print("B:decrease");
-    //   lcd.setCursor(14, 3);
-    //   lcd.print("D:Back");
-    //   if (key == 'A') {
-    //     DelayAmp += 1000;
-    //     EEPROM.write(2, DelayAmp / 1000);
-    //     EEPROM.commit();
-    //     Blynk.virtualWrite(V6, EEPROM.read(2));
-    //     Serial.println((String) "Received DelayAmp: " + DelayAmp);
-    //     // if (LineNoti) LINE.notify((String) "Received DelayAmp: " + DelayAmp / 1000 + " sec");
-    //   } else if (key == 'B') {
-    //     DelayAmp -= 1000;
-    //     EEPROM.write(2, DelayAmp / 1000);
-    //     EEPROM.commit();
-    //     Blynk.virtualWrite(V6, EEPROM.read(2));
-    //     Serial.println((String) "Received DelayAmp: " + DelayAmp);
-    //     // if (LineNoti) LINE.notify((String) "Received DelayAmp: " + DelayAmp / 1000 + " sec");
-    //   } else if (key == 'D') {
-    //     lcd.clear();
-    //     page = 0;
-    //   }
-    // }
-    // if (page == 3) {
-    //   lcd.setCursor(0, 0);
-    //   lcd.print("Amp Limit : ");
-    //   lcd.setCursor(12, 0);
-    //   lcd.print(AmpLimit);
-    //   lcd.setCursor(18, 0);
-    //   lcd.print("A");
-    //   lcd.setCursor(0, 2);
-    //   lcd.print("A:increase");
-    //   lcd.setCursor(0, 3);
-    //   lcd.print("B:decrease");
-    //   lcd.setCursor(14, 3);
-    //   lcd.print("D:Back");
-    //   if (key == 'A') {
-    //     AmpLimit += 1;
-    //     EEPROM.write(1, AmpLimit);
-    //     EEPROM.commit();
-    //     Blynk.virtualWrite(V9, EEPROM.read(1));
-    //     Serial.println((String) "Received AmpLimit: " + AmpLimit);
-    //     // if (LineNoti) LINE.notify((String) "Received AmpLimit: " + AmpLimit + " Amp");
-    //   } else if (key == 'B') {
-    //     AmpLimit -= 1;
-    //     EEPROM.write(1, AmpLimit);
-    //     EEPROM.commit();
-    //     Blynk.virtualWrite(V9, EEPROM.read(1));
-    //     Serial.println((String) "Received AmpLimit: " + AmpLimit);
-    //     // if (LineNoti) LINE.notify((String) "Received AmpLimit: " + AmpLimit + " Amp");
-    //   } else if (key == 'D') {
-    //     lcd.clear();
-    //     page = 0;
-    //   }
-  }
-  // End Show LCD
-
-
-
-=======
   Blynk.virtualWrite(V4, current);
 
   // Start CheckIf
->>>>>>> c9b41f7 (12/21/2024)
   // Check Pump Status
   if (current > 0.5) {    // ถ้าปั๊มทำงาน
     LEDpumpworking.on();  // เปิด LED v2
@@ -614,8 +280,6 @@ void loop() {
       StatusSendLineForceStop = 0;
     }
   }
-<<<<<<< HEAD
-=======
   // End CheckIf
 }
 
@@ -774,5 +438,4 @@ void loop() {
     }
   }
   // End Show LCD
->>>>>>> c9b41f7 (12/21/2024)
 }

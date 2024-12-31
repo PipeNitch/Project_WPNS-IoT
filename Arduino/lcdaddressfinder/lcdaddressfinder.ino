@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-//====== I2C Addresss Scan
+// I2C Addresss Scan
 #include <Wire.h>
 
 void setup() {
@@ -33,8 +32,7 @@ void setup() {
 
 void loop() {
 
-=======
-//====== I2C Addresss Scan
+// I2C Addresss Scan
 #include <Wire.h>
 
 void setup() {
@@ -68,5 +66,4 @@ void setup() {
 
 void loop() {
 
->>>>>>> c9b41f7 (12/21/2024)
 }
