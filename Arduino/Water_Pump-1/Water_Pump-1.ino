@@ -17,8 +17,8 @@ const char* LToken = "cZW2GpTn64FenmiTt38AfgMHWvt4XdlLS7gqChQmwnO";
 // const char* pass = "kai.kai.kai";
 const char* ssid = "Watnoo";
 const char* pass = "0817927275";
-const char* ssid = "Inch";
-const char* pass = "licht4825!";
+// const char* ssid = "Inch";
+// const char* pass = "licht4825!";
 
 const byte ROW_NUM = 4;
 const byte COLUMN_NUM = 4;
