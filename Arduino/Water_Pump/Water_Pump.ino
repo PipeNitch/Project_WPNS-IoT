@@ -1,3 +1,5 @@
+// ต่อบรรทัด 371
+
 #include <PZEM004Tv30.h>
 #include <BlynkSimpleEsp8266.h>
 #include <TridentTD_LineNotify.h>
@@ -209,6 +211,12 @@ void ReadSensor() {
   if (isnan(pzem.current())) current = 0;
   else current = pzem.current();
   FlowSwitchStatus = digitalRead(FlowSwitchAt);
+  // if (page == 0) {
+  //   lcd.setCursor(0, 3);
+  //   lcd.print("A : ");
+  //   lcd.setCursor(4, 3);
+  //   lcd.print(current);
+  // }
   Blynk.virtualWrite(V4, current);
 
   // Start CheckIf
@@ -287,18 +295,18 @@ void ReadSensor() {
 
 void MainMenu() {
   page = 0;
-  lcd.clear();
+  // lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print("1:Flow Delay");
+  lcd.print("1:FlowDelay  4:Other");
   lcd.setCursor(0, 1);
-  lcd.print("2:Amp Delay");
+  lcd.print("2:AmpDelay          ");
   lcd.setCursor(0, 2);
-  lcd.print("3:Amp Limit");
+  lcd.print("3:AmpLimit          ");
 }
 
 void PageDelayFlow() {
   page = 1;
-  lcd.clear();
+  // lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Flow Delay : ");
   lcd.setCursor(13, 0);
@@ -306,11 +314,11 @@ void PageDelayFlow() {
   lcd.setCursor(18, 0);
   lcd.print("s");
   lcd.setCursor(0, 1);
-  lcd.print("A:Add");
+  lcd.print("A:Add               ");
   lcd.setCursor(0, 2);
-  lcd.print("B:Reduce");
-  lcd.setCursor(14, 2);
-  lcd.print("D:Back");
+  lcd.print("B:Reduce      D:Back");
+  // lcd.setCursor(14, 2);
+  // lcd.print("D:Back");
 }
 void UpdateDelayFlow(unsigned long value) {
   Blynk.virtualWrite(V10, value);
@@ -322,7 +330,7 @@ void UpdateDelayFlow(unsigned long value) {
 
 void PageDelayAmp() {
   page = 2;
-  lcd.clear();
+  // lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Amp Delay : ");
   lcd.setCursor(12, 0);
@@ -330,11 +338,11 @@ void PageDelayAmp() {
   lcd.setCursor(18, 0);
   lcd.print("s");
   lcd.setCursor(0, 1);
-  lcd.print("A:Add");
+  lcd.print("A:Add               ");
   lcd.setCursor(0, 2);
-  lcd.print("B:Reduce");
-  lcd.setCursor(14, 2);
-  lcd.print("D:Back");
+  lcd.print("B:Reduce      D:Back");
+  // lcd.setCursor(14, 2);
+  // lcd.print("D:Back");
 }
 void UpdateDelayAmp(unsigned long value) {
   Blynk.virtualWrite(V6, value);
@@ -346,7 +354,7 @@ void UpdateDelayAmp(unsigned long value) {
 
 void PageAmpLimit() {
   page = 3;
-  lcd.clear();
+  // lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Amp Limit : ");
   lcd.setCursor(12, 0);
@@ -354,11 +362,11 @@ void PageAmpLimit() {
   lcd.setCursor(18, 0);
   lcd.print("A");
   lcd.setCursor(0, 1);
-  lcd.print("A:Add");
+  lcd.print("A:Add               ");
   lcd.setCursor(0, 2);
-  lcd.print("B:Reduce");
-  lcd.setCursor(14, 2);
-  lcd.print("D:Back");
+  lcd.print("B:Reduce      D:Back");
+  // lcd.setCursor(14, 2);
+  // lcd.print("D:Back");
 }
 void UpdateAmpLimit(unsigned long value) {
   Blynk.virtualWrite(V9, value);
@@ -366,6 +374,21 @@ void UpdateAmpLimit(unsigned long value) {
   Serial.println((String) "Received AmpLimit: " + value);
   if (LineNoti) LINE.notify((String) "Received AmpLimit: " + value + " Amp");
   PageAmpLimit();
+}
+
+void PageToggle(){
+  page = 4;
+  lcd.setCursor(0, 0);
+  lcd.print("Line Notify : ");
+  lcd.setCursor(14, 0);
+  lcd.print(LineNoti?"Yes":"No ");
+  lcd.setCursor(0, 1);
+  lcd.print("Protect Mode : ");
+  lcd.setCursor(15, 1);
+  lcd.print(ProtectMode?"Yes":"No");
+}
+void UpdatePageToggleLineNoti(){
+  Blynk.virtualWrite()
 }
 
 
@@ -382,7 +405,7 @@ void loop() {
   char key = keypad.getKey();
 
   Blynk.run();
-  Timer.run();
+  TimerClockDisplay.run();
   TimerSensor.run();
   if (key) {
     Serial.print("Key Pressed: ");
@@ -394,6 +417,7 @@ void loop() {
           case '1': PageDelayFlow(); break;
           case '2': PageDelayAmp(); break;
           case '3': PageAmpLimit(); break;
+          case '4': PageToggle(); break;
         }
         break;
       case 1:
