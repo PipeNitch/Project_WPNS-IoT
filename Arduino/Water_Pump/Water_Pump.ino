@@ -1,3 +1,5 @@
+// Line 463
+
 #include <PZEM004Tv30.h>
 #include <BlynkSimpleEsp8266.h>
 #include <TridentTD_LineNotify.h>
@@ -57,7 +59,7 @@ byte StatusSendLinePump = 0;
 // byte StatusSendLineNotFlow = 0;
 byte StatusSendLineHaveProblem = 0;
 float current = 0;
-byte page = 0;
+// byte page = 0;
 
 
 WidgetLED LEDpumpworking(V2);
@@ -79,16 +81,16 @@ BLYNK_WRITE(V10) {
   EEPROM.commit();
   if (LineNoti) LINE.notify((String) "Received DelayFlow: " + DelayFlow + " sec");
   DelayFlow = DelayFlow * 1000;
-  if (page == 1) PageDelayFlow();
-  Serial.println((String) "Received DelayFlow: " + DelayFlow);
+  // if (page == 1) PageDelayFlow();
+  // Serial.println((String) "Received DelayFlow: " + DelayFlow);
 }
 
 BLYNK_WRITE(V9) {
   AmpLimit = param.asInt();
   EEPROM.write(1, AmpLimit);
   EEPROM.commit();
-  if (page == 3) PageAmpLimit();
-  Serial.println((String) "Received AmpLimit: " + AmpLimit);
+  // if (page == 3) PageAmpLimit();
+  // Serial.println((String) "Received AmpLimit: " + AmpLimit);
   if (LineNoti) LINE.notify((String) "Received AmpLimit: " + AmpLimit + " Amp");
 }
 
@@ -98,8 +100,8 @@ BLYNK_WRITE(V6) {
   EEPROM.commit();
   if (LineNoti) LINE.notify((String) "Received DelayAmp: " + DelayAmp + " sec");
   DelayAmp = DelayAmp * 1000;
-  if (page == 2) PageDelayAmp();
-  Serial.println((String) "Received DelayAmp: " + DelayAmp);
+  // if (page == 2) PageDelayAmp();
+  // Serial.println((String) "Received DelayAmp: " + DelayAmp);
 }
 
 BLYNK_WRITE(V0) {
@@ -107,9 +109,9 @@ BLYNK_WRITE(V0) {
   EEPROM.write(3, LineNoti);
   EEPROM.commit();
   String message = (String) "Received LineNoti: " + (LineNoti ? "True" : "False");
-  Serial.println(message);
+  // Serial.println(message);
   LINE.notify(message);
-  if (page == 4) PageToggle();
+  // if (page == 4) PageToggle();
 }
 
 BLYNK_WRITE(V7) {
@@ -119,9 +121,9 @@ BLYNK_WRITE(V7) {
   EEPROM.write(4, ProtectMode);
   EEPROM.commit();
   String message = (String) "Received ProtectMode: " + (ProtectMode ? "True" : "False");
-  Serial.println(message);
+  // Serial.println(message);
   if (LineNoti) LINE.notify(message);
-  if (page == 4) PageToggle();
+  // if (page == 4) PageToggle();
 }
 
 BLYNK_WRITE(V11) {
@@ -130,7 +132,7 @@ BLYNK_WRITE(V11) {
     isExit = 0;
     LEDabnormalcurrent.off();
     LEDforcestop.off();
-    Serial.println("isExit = 0");
+    // Serial.println("isExit = 0");
     // if (LineNoti) LINE.notify("Reset System");
   }
 }
@@ -138,14 +140,14 @@ BLYNK_WRITE(V11) {
 
 
 void setup() {
-  Serial.begin(115200);
+  // Serial.begin(115200);
   WiFi.begin(ssid, pass);
   // while (WiFi.status() != WL_CONNECTED) {
   //   Serial.println("Connecting...");
   //   delay(250);
   // }
   Blynk.begin(auth, ssid, pass, "blynk.en-26.com", 9600);
-  Serial.println(LINE.getVersion());
+  // Serial.println(LINE.getVersion());
 
   TimerClockDisplay.setInterval(850L, ClockDisplay);
   TimerSensor.setInterval(1050L, ReadSensor);
@@ -164,7 +166,7 @@ void setup() {
   LineNoti = EEPROM.read(3);
   ProtectMode = EEPROM.read(4);
   isExit = 0;
-  page = 0;
+  // page = 0;
 
   Blynk.virtualWrite(V10, EEPROM.read(0));
   Blynk.virtualWrite(V9, EEPROM.read(1));
@@ -184,7 +186,8 @@ void setup() {
   if (isnan(pzem.current())) current = 0;
   else current = pzem.current();
 
-  MainMenu();
+  // MainMenu();
+  MainMenu1Page();
 }
 
 
@@ -193,8 +196,7 @@ void ClockDisplay() {
   char Time[10];
   sprintf(Time, "%d:%02d:%02d", hour(), minute(), second());
   String Date = String(day()) + "/" + month() + "/" + year();
-  Serial.println((String) "Current time: " + Time + " " + Date);
-  // Serial.println(current);
+  // Serial.println((String) "Current time: " + Time + " " + Date);
 
   lcd.setCursor(20 - strlen(Time), 3);
   lcd.print(Time);
@@ -297,9 +299,39 @@ void ReadSensor() {
 
 
 
+void MainMenu1Page(){
+  String FD = (String) "FD:"+DelayFlow/1000+" s";
+  String AD = (String) "AD:"+DelayAmp/1000+" s";
+  String AL = (String) "AL:"+AmpLimit+" A";
+  String Line = (String) "Line   :"+(LineNoti?"On ":"Off");
+  String Protect = (String) "Protect:"+(ProtectMode?"On ":"Off");
+  lcd.setCursor(0, 0);
+  lcd.print(FD);
+  lcd.setCursor(0, 1);
+  lcd.print(AD);
+  lcd.setCursor(0, 2);
+  lcd.print(AL);
+  lcd.setCursor(9, 0);
+  lcd.print(Line);
+  lcd.setCursor(9, 1);
+  lcd.print(Protect);
+}
+
+
+/*
+unsigned long DelayFlow = 0;
+unsigned long AmpLimit = 0;
+unsigned long DelayAmp = 0;
+byte LineNoti = 0;
+byte ProtectMode = 0;
+*/
+
+
+/*
+Start MultiPage
+
 void MainMenu() {
   page = 0;
-  // lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("1:FlowDelay  4:Other");
   lcd.setCursor(0, 1);
@@ -308,9 +340,9 @@ void MainMenu() {
   lcd.print("3:AmpLimit          ");
 }
 
+
 void PageDelayFlow() {
   page = 1;
-  // lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("FlowDelay :         ");
   lcd.setCursor(13, 0);
@@ -324,17 +356,8 @@ void PageDelayFlow() {
   // lcd.setCursor(14, 2);
   // lcd.print("D:Back");
 }
-void UpdateDelayFlow(unsigned long value) {
-  PageDelayFlow();
-  Blynk.virtualWrite(V10, value);
-  UpdateEEPROM(0, value, "DelayFlow");
-  Serial.println((String) "Received DelayFlow: " + value * 1000);
-  if (LineNoti) LINE.notify((String) "Received DelayFlow: " + value + " sec");
-}
-
 void PageDelayAmp() {
   page = 2;
-  // lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("AmpDelay :          ");
   lcd.setCursor(12, 0);
@@ -348,17 +371,8 @@ void PageDelayAmp() {
   // lcd.setCursor(14, 2);
   // lcd.print("D:Back");
 }
-void UpdateDelayAmp(unsigned long value) {
-  PageDelayAmp();
-  Blynk.virtualWrite(V6, value);
-  UpdateEEPROM(2, value, "DelayAmp");
-  Serial.println((String) "Received DelayAmp: " + value * 1000);
-  if (LineNoti) LINE.notify((String) "Received DelayAmp: " + value + " sec");
-}
-
 void PageAmpLimit() {
   page = 3;
-  // lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("AmpLimit :          ");
   lcd.setCursor(12, 0);
@@ -372,14 +386,6 @@ void PageAmpLimit() {
   // lcd.setCursor(14, 2);
   // lcd.print("D:Back");
 }
-void UpdateAmpLimit(unsigned long value) {
-  PageAmpLimit();
-  Blynk.virtualWrite(V9, value);
-  UpdateEEPROM(1, value, "AmpLimit");
-  Serial.println((String) "Received AmpLimit: " + value);
-  if (LineNoti) LINE.notify((String) "Received AmpLimit: " + value + " Amp");
-}
-
 void PageToggle() {
   page = 4;
   lcd.setCursor(0, 0);
@@ -393,12 +399,35 @@ void PageToggle() {
   lcd.setCursor(0, 2);
   lcd.print("              D:Back");
 }
+
+
+void UpdateDelayFlow(unsigned long value) {
+  PageDelayFlow();
+  Blynk.virtualWrite(V10, value);
+  UpdateEEPROM(0, value, "DelayFlow");
+  // Serial.println((String) "Received DelayFlow: " + value * 1000);
+  if (LineNoti) LINE.notify((String) "Received DelayFlow: " + value + " sec");
+}
+void UpdateDelayAmp(unsigned long value) {
+  PageDelayAmp();
+  Blynk.virtualWrite(V6, value);
+  UpdateEEPROM(2, value, "DelayAmp");
+  // Serial.println((String) "Received DelayAmp: " + value * 1000);
+  if (LineNoti) LINE.notify((String) "Received DelayAmp: " + value + " sec");
+}
+void UpdateAmpLimit(unsigned long value) {
+  PageAmpLimit();
+  Blynk.virtualWrite(V9, value);
+  UpdateEEPROM(1, value, "AmpLimit");
+  // Serial.println((String) "Received AmpLimit: " + value);
+  if (LineNoti) LINE.notify((String) "Received AmpLimit: " + value + " Amp");
+}
 void UpdatePageToggleLineNoti(byte value) {
   PageToggle();
   Blynk.virtualWrite(V0, value);
   UpdateEEPROM(3, value, "LineNoti");
   String message = (String) "Received LineNoti: " + (LineNoti ? "True" : "False");
-  Serial.println(message);
+  // Serial.println(message);
   LINE.notify(message);
 }
 void UpdatePageToggleProtectMode(byte value) {
@@ -406,16 +435,17 @@ void UpdatePageToggleProtectMode(byte value) {
   Blynk.virtualWrite(V7, value);
   UpdateEEPROM(4, value, "ProtectMode");
   String message = (String) "Received ProtectMode: " + (ProtectMode ? "True" : "False");
-  Serial.println(message);
+  // Serial.println(message);
   if (LineNoti) LINE.notify(message);
 }
 
+// End MultiPage
+*/
 
 
 void UpdateEEPROM(byte address, unsigned long value, String label) {
   EEPROM.write(address, value);
   EEPROM.commit();
-  // Serial.println("commited EEPROM");
 }
 
 
@@ -427,9 +457,14 @@ void loop() {
   TimerClockDisplay.run();
   TimerSensor.run();
   if (key) {
-    Serial.print("Key Pressed: ");
-    Serial.println(key);
     // Start Show LCD
+
+    switch(key){
+      case '1':
+    }
+
+    // Start MiltiPage
+    /*
     switch (page) {
       case 0:
         switch (key) {
@@ -491,6 +526,8 @@ void loop() {
           case 'D': MainMenu(); break;
         }
     }
+    */
+    // End MultiPage
   }
   // End Show LCD
 }
