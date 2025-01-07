@@ -15,12 +15,12 @@ const char* auth = "81PnZkd7Wmmt2rGAmoO7NaqeZ-Jc8kNd";
 const char* LToken = "cZW2GpTn64FenmiTt38AfgMHWvt4XdlLS7gqChQmwnO";
 
 // only 2.4 G
-const char* ssid = "NT-HUAWEI-2.4G";
-const char* pass = "kai.kai.kai";
+// const char* ssid = "NT-HUAWEI-2.4G";
+// const char* pass = "kai.kai.kai";
 // const char* ssid = "Watnoo";
 // const char* pass = "0817927275";
-// const char* ssid = "Inch";
-// const char* pass = "licht4825!";
+const char* ssid = "Inch";
+const char* pass = "licht4825!";
 
 const byte ROW_NUM = 4;
 const byte COLUMN_NUM = 4;
@@ -55,7 +55,7 @@ byte FlowSwitchStatus = 0;
 // isExit = 1 ; เพราะ Flow Switch ไม่ทำงาน
 // isExit = 2 ; เพราะ ไฟเกิน
 byte isExit = 0;
-byte StatusSendLinePump = 0;
+// byte StatusSendLinePump = 0;
 // byte StatusSendLineNotFlow = 0;
 byte StatusSendLineHaveProblem = 0;
 float current = 0;
@@ -79,7 +79,7 @@ BLYNK_WRITE(V10) {
   DelayFlow = param.asInt();
   EEPROM.write(0, DelayFlow);
   EEPROM.commit();
-  if (LineNoti) LINE.notify((String) "Received DelayFlow: " + DelayFlow + " sec");
+  // if (LineNoti) LINE.notify((String) "Received DelayFlow: " + DelayFlow + " sec");
   DelayFlow = DelayFlow * 1000;
   // if (page == 1) PageDelayFlow();
   // Serial.println((String) "Received DelayFlow: " + DelayFlow);
@@ -91,14 +91,14 @@ BLYNK_WRITE(V9) {
   EEPROM.commit();
   // if (page == 3) PageAmpLimit();
   // Serial.println((String) "Received AmpLimit: " + AmpLimit);
-  if (LineNoti) LINE.notify((String) "Received AmpLimit: " + AmpLimit + " Amp");
+  // if (LineNoti) LINE.notify((String) "Received AmpLimit: " + AmpLimit + " Amp");
 }
 
 BLYNK_WRITE(V6) {
   DelayAmp = param.asInt();
   EEPROM.write(2, DelayAmp);
   EEPROM.commit();
-  if (LineNoti) LINE.notify((String) "Received DelayAmp: " + DelayAmp + " sec");
+  // if (LineNoti) LINE.notify((String) "Received DelayAmp: " + DelayAmp + " sec");
   DelayAmp = DelayAmp * 1000;
   // if (page == 2) PageDelayAmp();
   // Serial.println((String) "Received DelayAmp: " + DelayAmp);
@@ -208,9 +208,11 @@ void ClockDisplay() {
 
 
 void ReadSensor() {
-  if (isnan(pzem.current())) current = 0;
+  if (isnan(pzem.current())) current = 0.00;
   else current = pzem.current();
   FlowSwitchStatus = digitalRead(FlowSwitchAt);
+  lcd.setCursor(0, 3);
+  lcd.print((String) "Amp:"+current+" A");
   // if (page == 0) {
   //   lcd.setCursor(0, 3);
   //   lcd.print("A : ");
@@ -224,12 +226,12 @@ void ReadSensor() {
   if (current > 0.5) {    // ถ้าปั๊มทำงาน
     LEDpumpworking.on();  // เปิด LED v2
     LEDpumppause.off();   // ปิด LED v3
-    if (LineNoti) {
-      if (!StatusSendLinePump) {
-        LINE.notify("Water Pump Active");
-        StatusSendLinePump = 1;
-      }
-    }
+    // if (LineNoti) {
+    //   if (!StatusSendLinePump) {
+    //     LINE.notify("Water Pump Active");
+    //     StatusSendLinePump = 1;
+    //   }
+    // }
 
     // Check FlowSwitch Status
     if (FlowSwitchStatus) {
@@ -299,12 +301,12 @@ void ReadSensor() {
 
 
 
-void MainMenu1Page(){
-  String FD = (String) "FD:"+DelayFlow/1000+" s";
-  String AD = (String) "AD:"+DelayAmp/1000+" s";
-  String AL = (String) "AL:"+AmpLimit+" A";
-  String Line = (String) "Line   :"+(LineNoti?"On ":"Off");
-  String Protect = (String) "Protect:"+(ProtectMode?"On ":"Off");
+void MainMenu1Page() {
+  String FD = (String) "FD:" + DelayFlow / 1000 + " s";
+  String AD = (String) "AD:" + DelayAmp / 1000 + " s";
+  String AL = (String) "AL:" + AmpLimit + " A";
+  String Line = (String) "Line   :" + (LineNoti ? "On " : "Off");
+  String Protect = (String) "Protect:" + (ProtectMode ? "On " : "Off");
   lcd.setCursor(0, 0);
   lcd.print(FD);
   lcd.setCursor(0, 1);
@@ -399,48 +401,53 @@ void PageToggle() {
   lcd.setCursor(0, 2);
   lcd.print("              D:Back");
 }
-
+*/
 
 void UpdateDelayFlow(unsigned long value) {
-  PageDelayFlow();
-  Blynk.virtualWrite(V10, value);
+  // PageDelayFlow();
+  MainMenu1Page();
+    Blynk.virtualWrite(V10, value);
   UpdateEEPROM(0, value, "DelayFlow");
   // Serial.println((String) "Received DelayFlow: " + value * 1000);
-  if (LineNoti) LINE.notify((String) "Received DelayFlow: " + value + " sec");
+  // if (LineNoti) LINE.notify((String) "Received DelayFlow: " + value + " sec");
 }
 void UpdateDelayAmp(unsigned long value) {
-  PageDelayAmp();
-  Blynk.virtualWrite(V6, value);
+  // PageDelayAmp();
+  MainMenu1Page();
+    Blynk.virtualWrite(V6, value);
   UpdateEEPROM(2, value, "DelayAmp");
   // Serial.println((String) "Received DelayAmp: " + value * 1000);
-  if (LineNoti) LINE.notify((String) "Received DelayAmp: " + value + " sec");
+  // if (LineNoti) LINE.notify((String) "Received DelayAmp: " + value + " sec");
 }
 void UpdateAmpLimit(unsigned long value) {
-  PageAmpLimit();
-  Blynk.virtualWrite(V9, value);
+  // PageAmpLimit();
+  MainMenu1Page();
+    Blynk.virtualWrite(V9, value);
   UpdateEEPROM(1, value, "AmpLimit");
   // Serial.println((String) "Received AmpLimit: " + value);
-  if (LineNoti) LINE.notify((String) "Received AmpLimit: " + value + " Amp");
+  // if (LineNoti) LINE.notify((String) "Received AmpLimit: " + value + " Amp");
 }
 void UpdatePageToggleLineNoti(byte value) {
-  PageToggle();
-  Blynk.virtualWrite(V0, value);
+  // PageToggle();
+  MainMenu1Page();
+    Blynk.virtualWrite(V0, value);
   UpdateEEPROM(3, value, "LineNoti");
-  String message = (String) "Received LineNoti: " + (LineNoti ? "True" : "False");
+  // String message = (String) "Received LineNoti: " + (LineNoti ? "True" : "False");
+  // LINE.notify(message);
   // Serial.println(message);
-  LINE.notify(message);
 }
 void UpdatePageToggleProtectMode(byte value) {
-  PageToggle();
-  Blynk.virtualWrite(V7, value);
+  // PageToggle();
+  MainMenu1Page();
+    Blynk.virtualWrite(V7, value);
   UpdateEEPROM(4, value, "ProtectMode");
-  String message = (String) "Received ProtectMode: " + (ProtectMode ? "True" : "False");
+  // String message = (String) "Received ProtectMode: " + (ProtectMode ? "True" : "False");
+  // if (LineNoti) LINE.notify(message);
   // Serial.println(message);
-  if (LineNoti) LINE.notify(message);
 }
 
 // End MultiPage
-*/
+
 
 
 void UpdateEEPROM(byte address, unsigned long value, String label) {
@@ -459,8 +466,39 @@ void loop() {
   if (key) {
     // Start Show LCD
 
-    switch(key){
+    switch (key) {
       case '1':
+        DelayFlow += 1000;
+        UpdateDelayFlow(DelayFlow / 1000);
+        break;
+      case '4':
+        DelayFlow -= 1000;
+        UpdateDelayFlow(DelayFlow / 1000);
+        break;
+      case '2':
+        DelayAmp += 1000;
+        UpdateDelayAmp(DelayAmp / 1000);
+        break;
+      case '5':
+        DelayAmp -= 1000;
+        UpdateDelayAmp(DelayAmp / 1000);
+        break;
+      case '3':
+        AmpLimit++;
+        UpdateAmpLimit(AmpLimit);
+        break;
+      case '6':
+        AmpLimit--;
+        UpdateAmpLimit(AmpLimit);
+        break;
+      case '*':
+        LineNoti = (LineNoti ? 0 : 1);
+        UpdatePageToggleLineNoti(LineNoti);
+        break;
+      case '#':
+        ProtectMode = (ProtectMode ? 0 : 1);
+        UpdatePageToggleProtectMode(ProtectMode);
+        break;
     }
 
     // Start MiltiPage
