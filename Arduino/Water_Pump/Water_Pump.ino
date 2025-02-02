@@ -1,5 +1,3 @@
-// Line 463
-
 #include <PZEM004Tv30.h>
 #include <BlynkSimpleEsp8266.h>
 #include <TridentTD_LineNotify.h>
@@ -19,8 +17,10 @@ const char* LToken = "cZW2GpTn64FenmiTt38AfgMHWvt4XdlLS7gqChQmwnO";
 // const char* pass = "kai.kai.kai";
 // const char* ssid = "Watnoo";
 // const char* pass = "0817927275";
-const char* ssid = "Inch";
-const char* pass = "licht4825!";
+// const char* ssid = "Inch";
+// const char* pass = "licht4825!";
+const char* ssid = "P";
+const char* pass = "gotodie1";
 
 const byte ROW_NUM = 4;
 const byte COLUMN_NUM = 4;
@@ -79,8 +79,10 @@ BLYNK_WRITE(V10) {
   DelayFlow = param.asInt();
   EEPROM.write(0, DelayFlow);
   EEPROM.commit();
-  // if (LineNoti) LINE.notify((String) "Received DelayFlow: " + DelayFlow + " sec");
   DelayFlow = DelayFlow * 1000;
+  MainMenu1Page();
+
+  // if (LineNoti) LINE.notify((String) "Received DelayFlow: " + DelayFlow + " sec");
   // if (page == 1) PageDelayFlow();
   // Serial.println((String) "Received DelayFlow: " + DelayFlow);
 }
@@ -89,6 +91,8 @@ BLYNK_WRITE(V9) {
   AmpLimit = param.asInt();
   EEPROM.write(1, AmpLimit);
   EEPROM.commit();
+  MainMenu1Page();
+
   // if (page == 3) PageAmpLimit();
   // Serial.println((String) "Received AmpLimit: " + AmpLimit);
   // if (LineNoti) LINE.notify((String) "Received AmpLimit: " + AmpLimit + " Amp");
@@ -97,9 +101,11 @@ BLYNK_WRITE(V9) {
 BLYNK_WRITE(V6) {
   DelayAmp = param.asInt();
   EEPROM.write(2, DelayAmp);
-  EEPROM.commit();
-  // if (LineNoti) LINE.notify((String) "Received DelayAmp: " + DelayAmp + " sec");
   DelayAmp = DelayAmp * 1000;
+  EEPROM.commit();
+  MainMenu1Page();
+
+  // if (LineNoti) LINE.notify((String) "Received DelayAmp: " + DelayAmp + " sec");
   // if (page == 2) PageDelayAmp();
   // Serial.println((String) "Received DelayAmp: " + DelayAmp);
 }
@@ -108,6 +114,8 @@ BLYNK_WRITE(V0) {
   LineNoti = param.asInt();
   EEPROM.write(3, LineNoti);
   EEPROM.commit();
+  MainMenu1Page();
+
   String message = (String) "Received LineNoti: " + (LineNoti ? "True" : "False");
   // Serial.println(message);
   LINE.notify(message);
@@ -120,6 +128,8 @@ BLYNK_WRITE(V7) {
   isExit = 0;
   EEPROM.write(4, ProtectMode);
   EEPROM.commit();
+  MainMenu1Page();
+
   String message = (String) "Received ProtectMode: " + (ProtectMode ? "True" : "False");
   // Serial.println(message);
   if (LineNoti) LINE.notify(message);
@@ -132,6 +142,7 @@ BLYNK_WRITE(V11) {
     isExit = 0;
     LEDabnormalcurrent.off();
     LEDforcestop.off();
+    MainMenu1Page();
     // Serial.println("isExit = 0");
     // if (LineNoti) LINE.notify("Reset System");
   }
@@ -149,8 +160,8 @@ void setup() {
   Blynk.begin(auth, ssid, pass, "blynk.en-26.com", 9600);
   // Serial.println(LINE.getVersion());
 
-  TimerClockDisplay.setInterval(850L, ClockDisplay);
-  TimerSensor.setInterval(1050L, ReadSensor);
+  TimerClockDisplay.setInterval(925L, ClockDisplay);
+  TimerSensor.setInterval(1025L, ReadSensor);
 
 
   keypad.begin(makeKeymap(keys));
@@ -212,7 +223,7 @@ void ReadSensor() {
   else current = pzem.current();
   FlowSwitchStatus = digitalRead(FlowSwitchAt);
   lcd.setCursor(0, 3);
-  lcd.print((String) "Amp:"+current+" A");
+  lcd.print((String) "Amp:"+current+" A  ");
   // if (page == 0) {
   //   lcd.setCursor(0, 3);
   //   lcd.print("A : ");
