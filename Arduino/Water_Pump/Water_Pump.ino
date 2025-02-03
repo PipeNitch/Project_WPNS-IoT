@@ -10,7 +10,8 @@
 #include <Keypad_I2C.h>
 
 const char* auth = "81PnZkd7Wmmt2rGAmoO7NaqeZ-Jc8kNd";
-const char* LToken = "cZW2GpTn64FenmiTt38AfgMHWvt4XdlLS7gqChQmwnO";
+// const char* LToken = "cZW2GpTn64FenmiTt38AfgMHWvt4XdlLS7gqChQmwnO"; // แชทส่วนตัว
+const char* LToken = "QeX3jVWhOnoRNy3DGanTDFzbulLXPl2cT2WYGYS60QW"; // แชทกลุ่ม
 
 // only 2.4 G
 // const char* ssid = "NT-HUAWEI-2.4G";
@@ -205,7 +206,7 @@ void setup() {
 
 void ClockDisplay() {
   char Time[10];
-  sprintf(Time, "%d:%02d:%02d", hour(), minute(), second());
+  sprintf(Time, "%02d:%02d:%02d", hour(), minute(), second());
   String Date = String(day()) + "/" + month() + "/" + year();
   // Serial.println((String) "Current time: " + Time + " " + Date);
 
