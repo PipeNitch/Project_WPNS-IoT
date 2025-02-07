@@ -6,4 +6,4 @@ set commit_message=Update: %date% %time:~0,8% from Windows
 
 git commit -m "%commit_message%"
 
-git push -u origin main
+git push -u origin main --force
