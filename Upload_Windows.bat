@@ -8,4 +8,4 @@ set commit_message=Update: %date% %time:~0,8% from %device_name% (Windows)
 
 git commit -m "%commit_message%"
 
-git push -u origin main --force
+git push -u origin main
