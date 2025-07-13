@@ -1,12 +1,11 @@
-F l o w D e l a y : _ _ _ _ _ _ _ _ _ _
-A m p D e l a y _ : _ _ _ _ _ _ _ _ _ _
-A m p L i m i t _ : _ _ _ _ _ _ _ _ _ _
-A m p : 0 . 0 0 _ A _ _ 0 0 : 0 0 : 0 0
+F D : 0 _ _ s _ _ N o t i _ _ _ : O f f
+A D : 0 _ _ s _ _ P r o t e c t : O f f
+A L : 0 _ _ A _ _ _ _ _ _ _ _ _ _ _ _ _
+A m p : X . X X _ A _ _ X X : X X : X X
 
-
-F D : 0 _ s _ _ _ L i n e _ _ _ : o f f 
-A D : 0 _ s _ _ _ P r o t e c t : o f f 
-A L : 0 _ A _ _ _ _ _ _ _ _ _ _ _ _ _ 
+F D : 0 _ _ s _ _ N o t i _ _ _ : O f f
+A D : 0 _ _ s _ _ P r o t e c t : O f f
+A L : 0 _ _ A _ _ _ _ _ _ _ _ _ _ _ _ _
 A m p : 0 . 0 0 _ A _ _ 0 0 : 0 0 : 0 0
 
 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9
@@ -16,3 +15,10 @@ A m p : 0 . 0 0 _ A _ _ 0 0 : 0 0 : 0 0
 7 8 9 C
 * 0 # D
 
+
+14 +- DelayFLow
+25 +- DelayAmp
+36 +- AmpLimit
+* Notify
+# ProtectMode
+0 Reset

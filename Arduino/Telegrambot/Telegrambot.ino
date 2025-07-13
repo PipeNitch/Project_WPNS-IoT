@@ -3,8 +3,8 @@
 #include <UniversalTelegramBot.h>
 #include <ArduinoJson.h>
 
-const char* ssid = "NT-HUAWEI-2.4G";
-const char* password = "kai.kai.kai";
+const char* ssid = "licht";
+const char* password = "licht4825!";
 
 #define BOTtoken "7796144445:AAGr5zH_RP1n7oc2ehF653BvTZrCtZ3dn2I"
 #define CHAT_ID "-4973400356"
