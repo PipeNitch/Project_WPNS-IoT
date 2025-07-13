@@ -31,13 +31,14 @@ const byte ROW_NUM = 4;
 const byte COLUMN_NUM = 4;
 
 char keys[ROW_NUM][COLUMN_NUM] = {
-    {'1', '2', '3', 'A'},
-    {'4', '5', '6', 'B'},
-    {'7', '8', '9', 'C'},
-    {'*', '0', '#', 'D'}};
+  { '1', '2', '3', 'A' },
+  { '4', '5', '6', 'B' },
+  { '7', '8', '9', 'C' },
+  { '*', '0', '#', 'D' }
+};
 
-byte pin_rows[ROW_NUM] = {0, 1, 2, 3};
-byte pin_column[COLUMN_NUM] = {4, 5, 6, 7};
+byte pin_rows[ROW_NUM] = { 0, 1, 2, 3 };
+byte pin_column[COLUMN_NUM] = { 4, 5, 6, 7 };
 
 WidgetRTC rtc;
 PZEM004Tv30 pzem(D6, D7);
@@ -45,8 +46,7 @@ BlynkTimer TimerClockDisplay, TimerSensor;
 Keypad_I2C keypad(makeKeymap(keys), pin_rows, pin_column, ROW_NUM, COLUMN_NUM, 0x20);
 LiquidCrystal_I2C lcd(0x27, 20, 4);
 
-BLYNK_CONNECTED()
-{
+BLYNK_CONNECTED() {
   rtc.begin();
 }
 
@@ -77,13 +77,11 @@ unsigned long DelayAmp = 0;
 byte Noti = 0;
 byte ProtectMode = 0;
 
-void sendTelegram(String message, String format = "")
-{
+void sendTelegram(String message, String format = "") {
   bot.sendMessage(CHAT_ID, message, format);
 }
 
-BLYNK_WRITE(V10)
-{
+BLYNK_WRITE(V10) {
   DelayFlow = param.asInt();
   EEPROM.write(0, DelayFlow);
   EEPROM.commit();
@@ -95,8 +93,7 @@ BLYNK_WRITE(V10)
   // Serial.println((String) "Received DelayFlow: " + DelayFlow);
 }
 
-BLYNK_WRITE(V9)
-{
+BLYNK_WRITE(V9) {
   AmpLimit = param.asInt();
   EEPROM.write(1, AmpLimit);
   EEPROM.commit();
@@ -107,8 +104,7 @@ BLYNK_WRITE(V9)
   // if (Noti) sendTelegram((String) "Received AmpLimit: " + AmpLimit + " Amp");
 }
 
-BLYNK_WRITE(V6)
-{
+BLYNK_WRITE(V6) {
   DelayAmp = param.asInt();
   EEPROM.write(2, DelayAmp);
   DelayAmp = DelayAmp * 1000;
@@ -120,8 +116,7 @@ BLYNK_WRITE(V6)
   // Serial.println((String) "Received DelayAmp: " + DelayAmp);
 }
 
-BLYNK_WRITE(V0)
-{
+BLYNK_WRITE(V0) {
   Noti = param.asInt();
   EEPROM.write(3, Noti);
   EEPROM.commit();
@@ -133,8 +128,7 @@ BLYNK_WRITE(V0)
   // if (page == 4) PageToggle();
 }
 
-BLYNK_WRITE(V7)
-{
+BLYNK_WRITE(V7) {
   ProtectMode = param.asInt();
   flowlasttime = lowamplasttime = millis();
   isExit = 0;
@@ -149,11 +143,9 @@ BLYNK_WRITE(V7)
   // if (page == 4) PageToggle();
 }
 
-BLYNK_WRITE(V11)
-{
+BLYNK_WRITE(V11) {
   int pinValue = param.asInt();
-  if (pinValue)
-  {
+  if (pinValue) {
     isExit = 0;
     LEDabnormalcurrent.off();
     LEDforcestop.off();
@@ -163,8 +155,8 @@ BLYNK_WRITE(V11)
   }
 }
 
-void setup()
-{
+void setup() {
+  // Serial.begin(115200);
   DelayFlow = EEPROM.read(0) * 1000;
   AmpLimit = EEPROM.read(1);
   DelayAmp = EEPROM.read(2) * 1000;
@@ -198,7 +190,6 @@ void setup()
   lcd.setCursor(0, 3);
   lcd.print((String) "Amp:X.XX A  XX:XX:XX");
 
-  // Serial.begin(115200);
   configTime(0, 0, "pool.ntp.org");
   client.setTrustAnchors(&cert);
   WiFi.begin(ssid, pass);
@@ -208,7 +199,10 @@ void setup()
   // }
   Blynk.begin(auth, ssid, pass, "blynk.en-26.com", 9600);
 
-  if (Noti) sendTelegram("Starting System");
+  if (Noti) {
+    sendTelegram("Starting System");
+    // Serial.println("sent Start");
+  }
 
   TimerClockDisplay.setInterval(925L, ClockDisplay);
   TimerSensor.setInterval(1025L, ReadSensor);
@@ -241,8 +235,7 @@ void setup()
   MainMenu1Page();
 }
 
-void ClockDisplay()
-{
+void ClockDisplay() {
   char Time[10];
   sprintf(Time, "%02d:%02d:%02d", hour(), minute(), second());
   String Date = String(day()) + "/" + month() + "/" + year();
@@ -255,8 +248,7 @@ void ClockDisplay()
   Blynk.virtualWrite(V12, Date);
 }
 
-void ReadSensor()
-{
+void ReadSensor() {
   if (isnan(pzem.current()))
     current = 0.00;
   else
@@ -274,10 +266,9 @@ void ReadSensor()
 
   // Start CheckIf
   // Check Pump Status
-  if (current > 0.5)
-  {                      // ถ้าปั๊มทำงาน
-    LEDpumpworking.on(); // เปิด LED v2
-    LEDpumppause.off();  // ปิด LED v3
+  if (current > 0.5) {    // ถ้าปั๊มทำงาน
+    LEDpumpworking.on();  // เปิด LED v2
+    LEDpumppause.off();   // ปิด LED v3
     // if (Noti) {
     //   if (!StatusSendNotiPump) {
     //     sendTelegram("Water Pump Active");
@@ -286,93 +277,71 @@ void ReadSensor()
     // }
 
     // Check FlowSwitch Status
-    if (FlowSwitchStatus)
-    {
-      LEDFlowSwitch.on(); // on LED v1
+    if (FlowSwitchStatus) {
+      LEDFlowSwitch.on();  // on LED v1
       flowlasttime = millis();
-    }
-    else
-    {
-      LEDFlowSwitch.off(); // off LED v1
-      if (millis() - flowlasttime > DelayFlow)
-      {
+    } else {
+      LEDFlowSwitch.off();  // off LED v1
+      if (millis() - flowlasttime > DelayFlow) {
         StatusSendNotiHaveProblem = (isExit ? 0 : 1);
         isExit = 1;
       }
     }
 
     // ตรวจสอบกระแสผิดปกติ
-    if (current > AmpLimit)
-    {
-      LEDabnormalcurrent.on(); // on LED v5
-      if (millis() - lowamplasttime > DelayAmp)
-      {
+    if (current > AmpLimit) {
+      LEDabnormalcurrent.on();  // on LED v5
+      if (millis() - lowamplasttime > DelayAmp) {
         StatusSendNotiHaveProblem = (isExit ? 0 : 2);
         isExit = 2;
       }
-    }
-    else
-    {
-      LEDabnormalcurrent.off(); // off LED v5
+    } else {
+      LEDabnormalcurrent.off();  // off LED v5
       lowamplasttime = millis();
     }
-  }
-  else
-  {
-    LEDpumpworking.off(); // off LED v2
-    LEDpumppause.on();    // on LED v3
+  } else {
+    LEDpumpworking.off();  // off LED v2
+    LEDpumppause.on();     // on LED v3
     LEDFlowSwitch.off();
     LEDabnormalcurrent.off();
     flowlasttime = lowamplasttime = millis();
   }
 
-  if (isExit == 1)
-  {
-    if (ProtectMode)
-    {
-      if (millis() - flowlasttime > DelayFlow)
-      {
+  if (isExit == 1) {
+    if (ProtectMode) {
+      if (millis() - flowlasttime > DelayFlow) {
         digitalWrite(RelayAt, 0);
         LEDpumpworking.off();
         LEDpumppause.on();
       }
     }
-    if (Noti && StatusSendNotiHaveProblem)
-    {
+    if (Noti && StatusSendNotiHaveProblem) {
       sendTelegram("Having Problem (Water not flow)");
       StatusSendNotiHaveProblem = 0;
     }
     LEDFlowSwitch.on();
     LEDforcestop.on();
-  }
-  else if (isExit == 2)
-  {
-    if (ProtectMode)
-    {
-      if (millis() - lowamplasttime > DelayAmp)
-      {
+  } else if (isExit == 2) {
+    if (ProtectMode) {
+      if (millis() - lowamplasttime > DelayAmp) {
         digitalWrite(RelayAt, 0);
         LEDpumpworking.off();
         LEDpumppause.on();
       }
     }
-    if (Noti && StatusSendNotiHaveProblem)
-    {
+    if (Noti && StatusSendNotiHaveProblem) {
       sendTelegram("Having Problem (High Amp usage)");
       StatusSendNotiHaveProblem = 0;
     }
     LEDforcestop.on();
     LEDabnormalcurrent.on();
-  }
-  else
-  {
+  } else {
     LEDforcestop.off();
     digitalWrite(RelayAt, 1);
   }
 }
 
-void MainMenu1Page()
-{
+void MainMenu1Page() {
   String FD = (String) "FD:" + DelayFlow / 1000;
   String AD = (String) "AD:" + DelayAmp / 1000;
   String AL = (String) "AL:" + AmpLimit;
@@ -472,8 +441,7 @@ void PageToggle() {
 }
 */
 
-void UpdateDelayFlow(unsigned long value)
-{
+void UpdateDelayFlow(unsigned long value) {
   // PageDelayFlow();
   MainMenu1Page();
   Blynk.virtualWrite(V10, value);
@@ -481,8 +449,7 @@ void UpdateDelayFlow(unsigned long value)
   // Serial.println((String) "Received DelayFlow: " + value * 1000);
   // if (Noti) sendTelegram((String) "Received DelayFlow: " + value + " sec");
 }
-void UpdateDelayAmp(unsigned long value)
-{
+void UpdateDelayAmp(unsigned long value) {
   // PageDelayAmp();
   MainMenu1Page();
   Blynk.virtualWrite(V6, value);
@@ -490,8 +457,7 @@ void UpdateDelayAmp(unsigned long value)
   // Serial.println((String) "Received DelayAmp: " + value * 1000);
   // if (Noti) sendTelegram((String) "Received DelayAmp: " + value + " sec");
 }
-void UpdateAmpLimit(unsigned long value)
-{
+void UpdateAmpLimit(unsigned long value) {
   // PageAmpLimit();
   MainMenu1Page();
   Blynk.virtualWrite(V9, value);
@@ -499,8 +465,7 @@ void UpdateAmpLimit(unsigned long value)
   // Serial.println((String) "Received AmpLimit: " + value);
   // if (Noti) sendTelegram((String) "Received AmpLimit: " + value + " Amp");
 }
-void UpdatePageToggleNoti(byte value)
-{
+void UpdatePageToggleNoti(byte value) {
   // PageToggle();
   MainMenu1Page();
   Blynk.virtualWrite(V0, value);
@@ -509,8 +474,7 @@ void UpdatePageToggleNoti(byte value)
   // sendTelegram(message);
   // Serial.println(message);
 }
-void UpdatePageToggleProtectMode(byte value)
-{
+void UpdatePageToggleProtectMode(byte value) {
   // PageToggle();
   MainMenu1Page();
   Blynk.virtualWrite(V7, value);
@@ -522,65 +486,61 @@ void UpdatePageToggleProtectMode(byte value)
 
 // End MultiPage
 
-void UpdateEEPROM(byte address, unsigned long value, String label)
-{
+void UpdateEEPROM(byte address, unsigned long value, String label) {
   EEPROM.write(address, value);
   EEPROM.commit();
 }
 
-void loop()
-{
+void loop() {
   char key = keypad.getKey();
 
   Blynk.run();
   TimerClockDisplay.run();
   TimerSensor.run();
-  if (key)
-  {
+  if (key) {
     // Start Show LCD
 
-    switch (key)
-    {
-    case '1':
-      DelayFlow += 1000;
-      UpdateDelayFlow(DelayFlow / 1000);
-      break;
-    case '4':
-      DelayFlow -= 1000;
-      UpdateDelayFlow(DelayFlow / 1000);
-      break;
-    case '2':
-      DelayAmp += 1000;
-      UpdateDelayAmp(DelayAmp / 1000);
-      break;
-    case '5':
-      DelayAmp -= 1000;
-      UpdateDelayAmp(DelayAmp / 1000);
-      break;
-    case '3':
-      AmpLimit++;
-      UpdateAmpLimit(AmpLimit);
-      break;
-    case '6':
-      AmpLimit--;
-      UpdateAmpLimit(AmpLimit);
-      break;
-    case '*':
-      Noti = (Noti ? 0 : 1);
-      UpdatePageToggleNoti(Noti);
-      break;
-    case '#':
-      ProtectMode = (ProtectMode ? 0 : 1);
-      UpdatePageToggleProtectMode(ProtectMode);
-      break;
-    case '0':
-      isExit = 0;
-      LEDabnormalcurrent.off();
-      LEDforcestop.off();
-      MainMenu1Page();
-      // Serial.println("isExit = 0");
-      // if (Noti) sendTelegram("Reset System");
-      break;
+    switch (key) {
+      case '1':
+        DelayFlow += 1000;
+        UpdateDelayFlow(DelayFlow / 1000);
+        break;
+      case '4':
+        DelayFlow -= 1000;
+        UpdateDelayFlow(DelayFlow / 1000);
+        break;
+      case '2':
+        DelayAmp += 1000;
+        UpdateDelayAmp(DelayAmp / 1000);
+        break;
+      case '5':
+        DelayAmp -= 1000;
+        UpdateDelayAmp(DelayAmp / 1000);
+        break;
+      case '3':
+        AmpLimit++;
+        UpdateAmpLimit(AmpLimit);
+        break;
+      case '6':
+        AmpLimit--;
+        UpdateAmpLimit(AmpLimit);
+        break;
+      case '*':
+        Noti = (Noti ? 0 : 1);
+        UpdatePageToggleNoti(Noti);
+        break;
+      case '#':
+        ProtectMode = (ProtectMode ? 0 : 1);
+        UpdatePageToggleProtectMode(ProtectMode);
+        break;
+      case '0':
+        isExit = 0;
+        LEDabnormalcurrent.off();
+        LEDforcestop.off();
+        MainMenu1Page();
+        // Serial.println("isExit = 0");
+        // if (Noti) sendTelegram("Reset System");
+        break;
     }
 
     // Start MiltiPage
