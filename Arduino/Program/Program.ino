@@ -124,7 +124,7 @@ BLYNK_WRITE(V0) {
 
   String message = (String) "Received Noti: " + (Noti ? "True" : "False");
   // Serial.println(message);
-  sendTelegram(message);
+  // sendTelegram(message);
   // if (page == 4) PageToggle();
 }
 
@@ -138,8 +138,7 @@ BLYNK_WRITE(V7) {
 
   String message = (String) "Received ProtectMode: " + (ProtectMode ? "True" : "False");
   // Serial.println(message);
-  if (Noti)
-    sendTelegram(message);
+  // if (Noti) sendTelegram(message);
   // if (page == 4) PageToggle();
 }
 
@@ -157,6 +156,7 @@ BLYNK_WRITE(V11) {
 
 void setup() {
   // Serial.begin(115200);
+  EEPROM.begin(512);
   DelayFlow = EEPROM.read(0) * 1000;
   AmpLimit = EEPROM.read(1);
   DelayAmp = EEPROM.read(2) * 1000;
@@ -166,49 +166,47 @@ void setup() {
   // page = 0;
 
   // Start Blank Menu
-  String FD = (String) "FD:" + DelayFlow / 1000;
-  String AD = (String) "AD:" + DelayAmp / 1000;
-  String AL = (String) "AL:" + AmpLimit;
-  String NotifyStatus = (String) "Noti   :" + (Noti ? "On " : "Off");
-  String Protect = (String) "Protect:" + (ProtectMode ? "On " : "Off");
-  lcd.setCursor(0, 0);
-  lcd.print(FD);
-  lcd.setCursor(6, 0);
-  lcd.print(" s");
-  lcd.setCursor(0, 1);
-  lcd.print(AD);
-  lcd.setCursor(6, 1);
-  lcd.print(" s");
-  lcd.setCursor(0, 2);
-  lcd.print(AL);
-  lcd.setCursor(6, 2);
-  lcd.print(" A");
-  lcd.setCursor(9, 0);
-  lcd.print(NotifyStatus);
-  lcd.setCursor(9, 1);
-  lcd.print(Protect);
-  lcd.setCursor(0, 3);
-  lcd.print((String) "Amp:X.XX A  XX:XX:XX");
+  // String FD = (String) "FD:" + DelayFlow / 1000 + (DelayFlow<10000?" ":0);
+  // String AD = (String) "AD:" + DelayAmp / 1000 + (DelayAmp<10000?" ":0);
+  // String AL = (String) "AL:" + AmpLimit + (AmpLimit<10?" ":0);
+  // String NotifyStatus = (String) "Noti   :" + (Noti ? "On " : "Off");
+  // String Protect = (String) "Protect:" + (ProtectMode ? "On " : "Off");
+  // lcd.setCursor(0, 0);
+  // lcd.print(FD);
+  // lcd.setCursor(6, 0);
+  // lcd.print("s");
+  // lcd.setCursor(0, 1);
+  // lcd.print(AD);
+  // lcd.setCursor(6, 1);
+  // lcd.print("s");
+  // lcd.setCursor(0, 2);
+  // lcd.print(AL);
+  // lcd.setCursor(6, 2);
+  // lcd.print("A");
+  // lcd.setCursor(9, 0);
+  // lcd.print(NotifyStatus);
+  // lcd.setCursor(9, 1);
+  // lcd.print(Protect);
+  // lcd.setCursor(0, 3);
 
   configTime(0, 0, "pool.ntp.org");
   client.setTrustAnchors(&cert);
   WiFi.begin(ssid, pass);
-  // while (WiFi.status() != WL_CONNECTED) {
-  //   Serial.println("Connecting...");
-  //   delay(250);
-  // }
-  Blynk.begin(auth, ssid, pass, "blynk.en-26.com", 9600);
-
-  if (Noti) {
-    sendTelegram("Starting System");
-    // Serial.println("sent Start");
+  // Serial.print("Connecting to WiFi");
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    // Serial.print(".");
   }
+  // Serial.println("\nWiFi connected");
+  Blynk.begin(auth, ssid, pass, "blynk.en-26.com", 9600);
+  // Serial.println(Noti);
+
+  sendTelegram("Starting System");
 
   TimerClockDisplay.setInterval(925L, ClockDisplay);
   TimerSensor.setInterval(1025L, ReadSensor);
 
   keypad.begin(makeKeymap(keys));
-  EEPROM.begin(512);
   ClockDisplay();
   lcd.init();
   lcd.backlight();
@@ -342,21 +340,28 @@ void ReadSensor() {
 }
 
 void MainMenu1Page() {
-  String FD = (String) "FD:" + DelayFlow / 1000;
-  String AD = (String) "AD:" + DelayAmp / 1000;
-  String AL = (String) "AL:" + AmpLimit;
+  String FD = (String) "FD:" + DelayFlow / 1000 + (DelayFlow<10000?" ":0);
+  String AD = (String) "AD:" + DelayAmp / 1000 + (DelayAmp<10000?" ":0);
+  String AL = (String) "AL:" + AmpLimit + (AmpLimit<10?" ":0);
   String NotifyStatus = (String) "Noti   :" + (Noti ? "On " : "Off");
   String Protect = (String) "Protect:" + (ProtectMode ? "On " : "Off");
   lcd.setCursor(0, 0);
   lcd.print(FD);
+  lcd.setCursor(6, 0);
+  lcd.print("s");
   lcd.setCursor(0, 1);
   lcd.print(AD);
+  lcd.setCursor(6, 1);
+  lcd.print("s");
   lcd.setCursor(0, 2);
   lcd.print(AL);
+  lcd.setCursor(6, 2);
+  lcd.print("A");
   lcd.setCursor(9, 0);
   lcd.print(NotifyStatus);
   lcd.setCursor(9, 1);
   lcd.print(Protect);
+  lcd.setCursor(0, 3);
 }
 
 /*
@@ -470,7 +475,7 @@ void UpdatePageToggleNoti(byte value) {
   MainMenu1Page();
   Blynk.virtualWrite(V0, value);
   UpdateEEPROM(3, value, "Noti");
-  // String message = (String) "Received Noti: " + (Noti ? "True" : "False");
+  String message = (String) "Received Noti: " + (Noti ? "True" : "False");
   // sendTelegram(message);
   // Serial.println(message);
 }
@@ -479,8 +484,8 @@ void UpdatePageToggleProtectMode(byte value) {
   MainMenu1Page();
   Blynk.virtualWrite(V7, value);
   UpdateEEPROM(4, value, "ProtectMode");
-  // String message = (String) "Received ProtectMode: " + (ProtectMode ? "True" : "False");
-  // if (Noti) sendTelegram(message);
+  String message = (String) "Received ProtectMode: " + (ProtectMode ? "True" : "False");
+  if (Noti) sendTelegram(message);
   // Serial.println(message);
 }
 
@@ -539,7 +544,7 @@ void loop() {
         LEDforcestop.off();
         MainMenu1Page();
         // Serial.println("isExit = 0");
-        // if (Noti) sendTelegram("Reset System");
+        if (Noti) sendTelegram("Reset System");
         break;
     }
 
