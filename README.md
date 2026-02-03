@@ -1,4 +1,6 @@
 Project_WPNS-IoT\
+\
+[Aliases]\
 An IoT-Based Notification and Shutdown System for Water Pumps\
 WPNS-IoT (Water Pump Notification & Shutdown System using IoT)\
 A notification and shutdown system for water pumps using Internet of Things (IoT) technology.\
